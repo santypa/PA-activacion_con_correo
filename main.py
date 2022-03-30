@@ -8,12 +8,17 @@ app.secret_key = "sdasdasdasd"
 
 @app.get("/")  #funcion decoradora crea una ruta.
 def login():    
-    return render_template("login.html")
+    usuario = usuariosmodels.obtenerUsuario()
+    return render_template("login.html",usuario=usuario)
 
-@app.preprocess_request("/")  #funcion decoradora crea una ruta.
-def login():    
+@app.post("/")  #funcion decoradora crea una ruta.
+def ingresar():    
     
-    return render_template("inicio.html")
+    usuario = usuariosmodels.ingresoUsuario()
+    if usuario == "":
+        return render_template("login.html")
+
+    return render_template("inicio.html",usuario=usuario)
 
 @app.get("/crear")
 def crearUsuario():

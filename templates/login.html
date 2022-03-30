@@ -1,9 +1,9 @@
 {% extends "base.html"%} 
 
-{% block title%}
+{% block titulo %}
     Index
 {% endblock %}
-
+  
 {% block contenido%}
 
 <div con class="border border-white">
@@ -19,8 +19,8 @@
         {% endif %}
     {% endwith %}
 
-    {{ usuario[0]}}
     
+
     <form action="{{url_for('crearUsuarioPost')}}" method="post">
         <div class="form-group">
             <label for="">Nombre</label>
