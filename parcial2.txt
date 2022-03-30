@@ -1,0 +1,62 @@
+1.Registro de usuarios:
+- Informacion del usuario:
+	Nombre
+	Email
+	Contraseña
+-Email de bienvenida y confirmacion.
+-Reenvio de email de confirmacion.
+-Validacion de datos:
+	Email no puede estar repetido.
+	contraseña cumpla unas politicas.
+	-Minimo 8 caracteres
+	-Tenga una mayuscula
+	-Tenga un numero
+	-tenga un caracter especial.
+-encriptacion de la contraseña
+
+2.Inicio de sesión
+-Formulario de Inicio.
+	Email
+	contraseña
+-Validacion:
+	Usuario este confirmado.
+
+3.Reestablecer la contraseña
+-formulario de restablecer contraseña-
+	Email
+-Correo isntructivo para recuperar la contraseña
+
+4.formulario para compartir archivos(Acceso con login)
+-Nombre.
+-Archivo.
+-Validaciones.
+
+
+5.listado de mis archivos.(Acceso de login)
+-Acciones.
+-Crear un nuevo archivo.
+-Editar un archivo.
+-Eliminar un archivo.
+-Compartir enalace de archivo.
+
+6.Acceso publico(Vista previa del archivo) 
+-Nombre.
+-Tipo de archivo.
+-Peso del archivo.
+-Previsualizacion(icono del archivo o imagen).	
+-Descargar.
+
+7.Extras 
+-Validaciones.
+-retroalimentaciones.
+-formularios sin perder informacion.
+-validaciones en el servidor.
+-Arquitectura 
+	modelo
+	-consultas sql
+	-funciones 
+	-clases
+	vista
+	-tempaltes
+	controlador
+	-

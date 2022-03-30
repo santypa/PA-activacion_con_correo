@@ -1,0 +1,50 @@
+{% extends "base.html"%} 
+
+{% block title%}
+    Crear Usuario
+{% endblock %}
+
+{% block contenido%}
+
+<div con class="border border-white">
+    <h1>Crear producto</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="alert alert-danger">
+            {% for messages in messages %}
+                <li>{{messages}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+
+    <div>
+        <a href="{{ url_for('login')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">VOLVER</a>
+
+    </div>
+    
+
+    <form action="{{url_for('crearUsuarioPost')}}" method="post">
+        <div class="form-group">
+            <label for="">Nombre</label>
+            <input type="text" name="nombre" value="{{nombre}}" class="form-control" placeholder="Usuario" required>
+        </div>
+        <div class="form-group">
+            <label for="">email</label>
+            <input type="text" name="email" value="{{email}}" class="form-control" placeholder="email persona" required>
+        </div>
+        <div class="form-group">
+            <label for="">password</label>
+            <input type="password" name="password" value="{{password}}" class="form-control" placeholder="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    </form>
+</div>
+
+
+{% endblock%}
