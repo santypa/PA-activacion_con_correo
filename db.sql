@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nombre` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `activo` int(11) DEFAULT NULL,
+  `activo` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 

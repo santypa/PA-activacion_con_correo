@@ -1,10 +1,11 @@
 {% extends "base.html"%} 
 
 {% block titulo %}
-    Index
+    LOGIN
 {% endblock %}
   
 {% block contenido%}
+
 
 <div class="padre">
     <h1>Ingresar</h1>
@@ -18,8 +19,9 @@
         </ul>
         {% endif %}
     {% endwith %}
+    
+    <form action="{{url_for('ingresar')}}" method="post">
 
-    <form action="{{url_for('crearUsuarioPost')}}" method="post">
         <div class="form-group">
             <label for="">Nombre</label>
             <input type="text" name="nombre" value="{{nombre}}" class="form-control" placeholder="Usuario" required>
@@ -37,6 +39,5 @@
 <div class="botones">
     <a href="{{ url_for('crearUsuario')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Registrarse</a>
 </div>
-
 
 {% endblock%}
