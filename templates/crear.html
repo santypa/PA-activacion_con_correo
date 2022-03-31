@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block contenido%}
-
-<div con class="border border-white">
+<center>
+<div class="padre">
     <h1>REGISTRAR USUARIO</h1>
 
     {% with messages = get_flashed_messages() %}
@@ -19,12 +19,6 @@
         {% endif %}
     {% endwith %}
 
-
-    <div>
-        <a href="{{ url_for('login')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">VOLVER</a>
-
-    </div>
-    
 
     <form action="{{url_for('crearUsuarioPost')}}" method="post">
         <div class="form-group">
@@ -42,9 +36,12 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
 
-
     </form>
+
+    <div class="botones">
+        <a href="{{ url_for('login')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">VOLVER</a>
+    </div>
 </div>
-
-
+</center>
 {% endblock%}
+
