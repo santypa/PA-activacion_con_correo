@@ -1,13 +1,13 @@
 {% extends "base.html"%} 
 
 {% block titulo %}
-    Index
+    LOGIN
 {% endblock %}
   
 {% block contenido%}
 
 <div con class="border border-white">
-    <h1>Ingresar</h1>
+    <h1>INGRESAR</h1>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -20,8 +20,8 @@
     {% endwith %}
 
     
-
-    <form action="{{url_for('crearUsuarioPost')}}" method="post">
+    
+    <form action="{{url_for('ingresar')}}" method="post">
         <div class="form-group">
             <label for="">Nombre</label>
             <input type="text" name="nombre" value="{{nombre}}" class="form-control" placeholder="Usuario" required>

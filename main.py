@@ -8,22 +8,36 @@ app.secret_key = "sdasdasdasd"
 
 @app.get("/")  #funcion decoradora crea una ruta.
 def login():    
-    usuario = usuariosmodels.obtenerUsuario()
-    return render_template("login.html",usuario=usuario)
+    return render_template("login.html")
 
 @app.post("/")  #funcion decoradora crea una ruta.
-def ingresar():    
+def ingresar():  
     
-    usuario = usuariosmodels.ingresoUsuario()
-    if usuario == "":
+    
+    nombre = request.form.get('nombre')
+    password = request.form.get('password')
+    
+    if nombre == "":
+        flash("este campo es obligatorio")
+        
+    if password == "":
+        flash("este campo es obligatorio")
+    
+    
+    ''' usuariosmodels.ingresoUsuario(nombre=nombre,password=password) '''
+    
+    usuario = usuariosmodels.ingresoUsuario(nombre=nombre,password=password)
+    print(usuario)
+    
+    if usuario == []:
         return render_template("login.html")
 
     return render_template("inicio.html",usuario=usuario)
 
 @app.get("/crear")
 def crearUsuario():
-
     return render_template("crear.html")
+
 
 @app.post("/crear")
 def crearUsuarioPost():
@@ -53,8 +67,6 @@ def crearUsuarioPost():
     return render_template("login.html")
 
     #return redirect(url_for("/"))
-
-
 
 app.run(debug=True)
 
