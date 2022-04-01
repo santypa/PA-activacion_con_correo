@@ -27,7 +27,7 @@ def ingresar():
     ''' usuariosmodels.ingresoUsuario(nombre=nombre,password=password) '''
     
     usuario = usuariosmodels.ingresoUsuario(nombre=nombre,password=password)
-    print(usuario)
+    ''' print(usuario) '''
     
     if usuario == []:
         return render_template("login.html")
