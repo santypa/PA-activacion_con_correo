@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from models import usuariosmodels
 from models import validarcorreo
 from models import validarlogin
+from models import send_main
 
 
 app = Flask(__name__)  # instancia python.
@@ -53,21 +54,20 @@ def crearUsuarioPost():
     nombre = request.form.get('nombre')
     email = request.form.get('email')
     password = request.form.get('password')
-    direccion = request.form.get('email')
     
     valido1 = validarcorreo.validarlog(nombre=nombre,email=email,password=password)
     valido = validarcorreo.correovalido(email=email)
-
     valor=validarcorreo.redir(valido1=valido1,valido=valido,nombre=nombre,email=email,password=password)
     if valor == True:
         return render_template("crear.html", nombre=nombre, email=email, password=password)
     
-    
     usuariosmodels.crearusuario(nombre=nombre, email=email, password=password)
 
-    ''' asunto = "ESTE es el asunto"
-    usuariosmodels.enviarcorreo(direccion=direccion, asunto=asunto)
-     '''
+    asunto = "ESTE es el asunto"
+    direccion = email
+    
+    send_main.correo(asunto=asunto,direccion=direccion)
+    
     return render_template("login.html")
 
 app.run(debug=True)
