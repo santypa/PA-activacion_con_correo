@@ -13,7 +13,7 @@ app.secret_key = "sdasdasdasd"
 @app.get("/")  # funcion decoradora crea una ruta.
 def login():
     if not 'usuario_id' in session:
-        return render_template("login.html")
+        return render_template("inicio.html")
     
     return render_template("login.html")
 
@@ -31,11 +31,8 @@ def ingresar():
         flash("este campo es obligatorio")
 
     usuario = usuariosmodels.ingresoUsuario(email=email, password=password)
-    
-    print(usuario['id'])
     session['usuario_id']= usuario['id']
-    
-    
+   
     if usuario == None:
         flash("Usuario o Paswword incorrectos")
         return render_template("login.html")
@@ -45,7 +42,8 @@ def ingresar():
             flash("El usuario no esta activo")
             return render_template("login.html")
 
-    return render_template("inicio.html") 
+    return redirect(url_for('login'))
+    #return render_template("inicio.html") 
     #return render_template("inicio.html", usuario=usuario)
 
 @app.get("/crear")
@@ -73,7 +71,6 @@ def crearUsuarioPost():
 
     ''' asunto = "BIENVENIDO"
     direccion = email
-    
     send_main.correo(asunto=asunto,direccion=direccion) '''
     
     return render_template("login.html")
@@ -83,7 +80,7 @@ def crearUsuarioPost():
 def guardarimagen():
     return render_template("inicio.html")
 
-@app.post("/añadir")
+''' @app.post("/añadir")
 def guardarimagen():
     
     imagen = request.files['imagen']
@@ -91,13 +88,13 @@ def guardarimagen():
     #imagen.save(imagen.filename)
     usuariosmodels.crearimagen(imagen=imagen)
     
-    return render_template("inicio.html")
+    return render_template("inicio.html") '''
 
 
-@app.post("/limpiar")
+@app.get("/limpiar")
 def cerrarsesion():
     session.clear
-    return render_template("login.html")
+    return redirect(url_for('login'))
     
     
 app.run(debug=True)
