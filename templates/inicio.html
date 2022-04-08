@@ -5,5 +5,39 @@
 {% endblock %}
   
 {% block contenido%}
-asdasdasdasda
+
+<center>
+<div class="padre2">
+    <h1>INGRESAR</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="alert alert-danger">
+            {% for messages in messages %}
+                <li>{{messages}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <form action="{{url_for('ingresar')}}" method="post"
+        enctype="multipart/form-data"
+    >
+    
+        <div class="form-group">
+            <label for="">imagen</label>
+            <input type="file" name="imagen" value="{{imagen}}" class="form-control" required>
+        </div>
+
+        <br>
+        <div class="botones">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+       <!--  <a href="{{ url_for('login')}}"  class="btn btn-primary" role="button" aria-pressed="true">LOGIN</a>
+   -->   </div>      
+    </form>
+
+    <!-- <img src="{{usuarios['imagen']}}"> -->
+
+</div>
+</center>
 {% endblock%}

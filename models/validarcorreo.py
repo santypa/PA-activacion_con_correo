@@ -103,12 +103,14 @@ def validarlog(nombre,email,password):
         
     return valor
 
-def redir(valido1,valido,nombre,email,password):
+def redir(usuario,valido1,valido,nombre,email,password):
     
     isValid1=valido1
     isValid=valido
+    
+    
     valor = False
-    if isValid == False or isValid1 == False:
+    if isValid == False or isValid1 == False or usuario == False :
         valor = True
         
     return valor

@@ -1,5 +1,10 @@
 
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from msilib.schema import MIME
+
+
 def correo(asunto,direccion):
     from flask import request
     from config import settings
@@ -16,6 +21,26 @@ def correo(asunto,direccion):
     message['Subject'] = asunto
     message['From']='hermelsalazar2020@itp.edu.co'
     message['To']= direccion
+    ''' message = MIMEMultipart()
+    
+    html_body = f
+    <html>
+        <header></header>
+        <body>
+        
+        <h1>BIENVENIDO</h1>
+        <p>
+        para verificar su correo presione el siguiente boton 
+        gracias
+        </p>
+        
+            hola mundo
+        </body>
+    </html>
+    
+   
+    message.attach(MIMEText(html_body,"html")) '''
+    
     #yeferlopez09@gmail.com
 
     username = settings.SMTP_USERNAME
