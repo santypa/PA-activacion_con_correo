@@ -12,7 +12,6 @@ def obtenerUsuario():
 
     return usuario
 
-
 def verificarusuario(email):
     valor = True
     cursor = db.cursor(dictionary=True)
@@ -21,7 +20,6 @@ def verificarusuario(email):
     ))
     
     user = cursor.fetchone()
-    print(user)
     cursor.close()
     
     if user != None:
@@ -42,7 +40,6 @@ def ingresoUsuario(email, password):
     cursor.close()
 
     return usuario
-
 
 def crearusuario(nombre, email, password):
 

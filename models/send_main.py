@@ -1,11 +1,9 @@
 
 
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from msilib.schema import MIME
-
-
 def correo(direccion):
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    from msilib.schema import MIME
     from flask import request
     from config import settings
     from email import message
@@ -14,34 +12,39 @@ def correo(direccion):
     from smtplib import SMTP
     from email.message import EmailMessage
     from typing_extensions import Required
-   
-    
-    message = EmailMessage()
 
-    message['Subject'] = "Activacion de correo"
-    message['From']='hermelsalazar2020@itp.edu.co'
-    message['To']= direccion
-    ''' message = MIMEMultipart()
+    message = EmailMessage()
+    message = MIMEMultipart("alternative")
     
-    html_body = f
-    <html>
-        <header></header>
-        <body>
+    message['Subject'] = "CODIGO DE ACTIVACION"
+    message['From'] = 'hermelsalazar2020@itp.edu.co'
+    message['To'] = direccion
+
+    html = f"""
+    
+    <HTML>
+        <HEAD>
         
-        <h1>BIENVENIDO</h1>
-        <p>
-        para verificar su correo presione el siguiente boton 
-        gracias
-        </p>
-        
-            hola mundo
-        </body>
-    </html>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  
+           estiomado {direccion} para poder terminar con la activacion de su correo adecuadamente.
+           por favor presione el boton:
+           
+        </HEAD>
+        <BODY>
+            <a href="http://127.0.0.1:5000/activar"  class="btn btn-primary" role="button" aria-pressed="true"> ACTIVAR </a>
+        </BODY>
+    </HTML> 
+    """
     
-   
-    message.attach(MIMEText(html_body,"html")) '''
-    
-    #yeferlopez09@gmail.com
+    parte_html = MIMEText(html,"html")
+    message.attach(parte_html)
+
+    # yeferlopez09@gmail.com
 
     username = settings.SMTP_USERNAME
     password = settings.SMTP_PASSWORD
@@ -53,5 +56,5 @@ def correo(direccion):
     server.login(username, password)
     server.send_message(message)
 
-    server.quit() 
+    server.quit()
     print("se envio el correo")
