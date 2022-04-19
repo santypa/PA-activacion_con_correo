@@ -12,7 +12,8 @@ app.secret_key = "sdasdasdasd"
 
 @app.get("/")  # funcion decoradora crea una ruta.
 def login():
-    if not 'usuario_id' in session:
+    
+    if 'usuario_id' in session:
         return render_template("inicio.html")
     
     return render_template("login.html")
@@ -30,9 +31,9 @@ def ingresar():
     if password == "":
         flash("este campo es obligatorio")
 
+
     usuario = usuariosmodels.ingresoUsuario(email=email, password=password)
-    session['usuario_id']= usuario['id']
-   
+    
     if usuario == None:
         flash("Usuario o Paswword incorrectos")
         return render_template("login.html")
@@ -41,9 +42,15 @@ def ingresar():
         if usuario['activo'] == None:
             flash("El usuario no esta activo")
             return render_template("login.html")
-
-    return redirect(url_for('login'))
-    #return render_template("inicio.html") 
+        
+    session['usuario_id']= usuario['id']
+   
+    
+        
+    if 'usuario_id' in session:
+        return render_template("inicio.html",usuario=usuario)
+    
+    return render_template("login.html",usuario=usuario) 
     #return render_template("inicio.html", usuario=usuario)
 
 @app.get("/crear")
@@ -57,13 +64,16 @@ def crearUsuarioPost():
     nombre = request.form.get('nombre')
     email = request.form.get('email')
     password = request.form.get('password')
-    
+    correo = email
+    print(correo)
     
     valido1 = validarcorreo.validarlog(nombre=nombre,email=email,password=password)
     valido = validarcorreo.correovalido(email=email)
-    usuario = usuariosmodels.verificarusuario(nombre=nombre,email=email)
+    usuario = usuariosmodels.verificarusuario(email=email)
+    
     
     valor=validarcorreo.redir(usuario=usuario,valido1=valido1,valido=valido,nombre=nombre,email=email,password=password)
+    
     if valor == True:
         return render_template("crear.html", nombre=nombre, email=email, password=password)
     
@@ -78,6 +88,7 @@ def crearUsuarioPost():
 
 @app.get("/añadir")
 def guardarimagen():
+    
     return render_template("inicio.html")
 
 ''' @app.post("/añadir")
@@ -93,7 +104,7 @@ def guardarimagen():
 
 @app.get("/limpiar")
 def cerrarsesion():
-    session.clear
+    session.clear()
     return redirect(url_for('login'))
     
     

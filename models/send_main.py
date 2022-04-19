@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from msilib.schema import MIME
 
 
-def correo(asunto,direccion):
+def correo(direccion):
     from flask import request
     from config import settings
     from email import message
@@ -18,7 +18,7 @@ def correo(asunto,direccion):
     
     message = EmailMessage()
 
-    message['Subject'] = asunto
+    message['Subject'] = "Activacion de correo"
     message['From']='hermelsalazar2020@itp.edu.co'
     message['To']= direccion
     ''' message = MIMEMultipart()

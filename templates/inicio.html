@@ -8,17 +8,8 @@
 
 <center>
 <div class="padre2">
-    <h1>INGRESAR</h1>
+    <h1>INICIO</h1>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="alert alert-danger">
-            {% for messages in messages %}
-                <li>{{messages}}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    {% endwith %}
     
     <form action="{{url_for('ingresar')}}" method="post"
         enctype="multipart/form-data"
@@ -32,11 +23,11 @@
         <br>
         <div class="botones">
         <button type="submit" class="btn btn-primary">Guardar</button>
-       <!--  <a href="{{ url_for('login')}}"  class="btn btn-primary" role="button" aria-pressed="true">LOGIN</a>
-   -->   </div>      
+           <a href="{{ url_for('cerrarsesion')}}"  class="btn btn-primary" role="button" aria-pressed="true">SALIR</a>
+      </div>      
     </form>
 
-    <!-- <img src="{{usuarios['imagen']}}"> -->
+    {#<img src="{{usuarios['imagen']}}">#} 
 
 </div>
 </center>

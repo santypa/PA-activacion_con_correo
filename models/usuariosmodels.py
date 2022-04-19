@@ -13,20 +13,20 @@ def obtenerUsuario():
     return usuario
 
 
-def verificarusuario(nombre,email):
+def verificarusuario(email):
     valor = True
-    
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * from usuarios where nombre = %s or email = %s", (
-        nombre,
-        email
+    cursor.execute("SELECT * from usuarios where email = %s", (
+        email,
     ))
-    usuario = cursor.fetchall()
     
+    user = cursor.fetchone()
+    print(user)
     cursor.close()
-    if usuario != None:
+    
+    if user != None:
        valor = False
-       flash("El usuario o la contraseña ya existen")
+       flash("El correo ya tiene un usuario registrado")
        
     return valor
 
