@@ -30,14 +30,25 @@ def verificarusuario(email):
 
 def ingresoUsuario(email, password):
 
-   
+
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * from usuarios where email = %s and password = %s", (
-        email,
-        password
-    ))
-    usuario = cursor.fetchone()
+    cursor.execute("SELECT  id,nombre,PASSWORD,activo  from usuarios WHERE email = %s",(email,))
+    usuario = cursor.fetchall()
     cursor.close()
+    
+    for passw in usuario:
+        pas=check_password_hash(passw["PASSWORD"],password),
+        
+        
+    if pas == True:
+        print("si esta el usuario")
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * from usuarios where email = %s and password = %s", (
+           email,
+           password
+         ))
+        usuario = cursor.fetchone()
+        cursor.close()
 
     return usuario
 
@@ -60,3 +71,6 @@ def crearimagen(imagen):
     cursor.close()
 
     return 
+
+#comparar la encriptacion con la original
+    #print(check_password_hash(password,password))

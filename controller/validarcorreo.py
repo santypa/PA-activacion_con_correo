@@ -3,7 +3,6 @@ from sqlalchemy import true
 from werkzeug.security import generate_password_hash, check_password_hash
 from re import T
 import re
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 
@@ -116,5 +115,3 @@ def redir(usuario,valido1,valido,nombre,email,password):
     return valor
 
 
-#comparar la encriptacion con la original
-#print(check_password_hash(password,password))

@@ -16,8 +16,11 @@ def correo(direccion):
     message = EmailMessage()
     message = MIMEMultipart("alternative")
     
+    username = settings.SMTP_USERNAME
+    password = settings.SMTP_PASSWORD
+    
     message['Subject'] = "CODIGO DE ACTIVACION"
-    message['From'] = 'hermelsalazar2020@itp.edu.co'
+    message['From'] = username
     message['To'] = direccion
 
     html = f"""
@@ -40,14 +43,14 @@ def correo(direccion):
         </BODY>
     </HTML> 
     """
-    
+
     parte_html = MIMEText(html,"html")
     message.attach(parte_html)
 
     # yeferlopez09@gmail.com
-
-    username = settings.SMTP_USERNAME
-    password = settings.SMTP_PASSWORD
+    
+    #username = settings.SMTP_USERNAME
+    
 
     print("SE ESTA ENVIANDO EL CORREO ESPERE ....")
 

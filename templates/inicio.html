@@ -10,28 +10,24 @@
 <div class="padre2">
     <h1>INICIO</h1>
 
-    
-    <form action="{{url_for('ingresar')}}" method="post"
-        enctype="multipart/form-data"
-    >
-    
-        <div class="form-group">
-            <label for="">imagen</label>
-            <input type="file" name="imagen" value="{{imagen}}" class="form-control" required>
-        </div>
+    <form action="{{ url_for('guardarimagenpost')}}"
+    enctype="multipart/form-data" method="POST">
 
-        <br>
-        <div class="botones">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-           <a href="{{ url_for('cerrarsesion')}}"  class="btn btn-primary" role="button" aria-pressed="true">SALIR</a>
-           <a href="https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation" role="button" aria-pressed="true">enviar
+    <div>
+        <label for="">Nombre</label>
+        <input type="text" name="nombre" required>
+    </div><br>
+    <div>
+        <label form="">Imagen</label>
+        <input type="file" name="imagen" required>
+    </div><br>
+    <button type="submit">Guardar</button>
 
-           </a>
-      </div>      
-    </form>
+</form>
 
-    {#<img src="{{usuarios['imagen']}}">#} 
-
+<a href="{{ url_for('cerrarsesion')}}"  class="btn btn-primary" role="button" aria-pressed="true">SALIR</a>
+<a href="{{ url_for('guardarimagen')}}"  class="btn btn-primary" role="button" aria-pressed="true">Archivos</a>
+   
 </div>
 </center>
 {% endblock%}

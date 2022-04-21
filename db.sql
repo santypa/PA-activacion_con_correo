@@ -20,9 +20,9 @@ USE `login`;
 -- Volcando estructura para tabla login.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `nombre` varchar(1000) DEFAULT NULL,
+  `email` varchar(1000) DEFAULT NULL,
+  `password` varchar(1000) DEFAULT NULL,
   `activo` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;

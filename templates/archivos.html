@@ -1,0 +1,39 @@
+{% extends "base.html"%}
+
+{% block titulo %}
+Archivos
+{% endblock %}
+
+{% block contenido%}
+
+    <div class="padre2">
+
+        <div class="Container">
+            <div class="row">
+                {% for archivo in archivos %}
+                <div class="col">
+                    <div class="card">
+
+                        {% if archivo['img']: %}
+                        <img src="{{archivo['img'] }}" style="width: 50%; ">
+                        {% endif %}
+
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{archivo['nombre'] }}</h5>
+                            <a href="#" class="btn btn-primary">Editar</a>
+                            <a href="#" class="btn btn-primary">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <a href="{{ url_for('cerrarsesion')}}"  class="btn btn-primary" role="button" aria-pressed="true">SALIR</a>
+        <a href="{{ url_for('ingresar')}}"  class="btn btn-primary" role="button" aria-pressed="true">Agregar</a>
+
+    </div>
+
+
+{% endblock%}
