@@ -1,10 +1,11 @@
 from email.mime import image
 from requests import session
 from config.database import db
-from flask import Flask, render_template, request, redirect, url_for, flash ,session
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 
-def obtenerarchivo(persona):
+def obtenerarchivo():
     
+    persona= session["usuario_id"]
     cursor= db.cursor(dictionary=True)
     cursor.execute("SELECT * from imagenes where id_imagen = %s ",(
         persona,
@@ -16,7 +17,6 @@ def obtenerarchivo(persona):
 
 
 def guardararchivo(idpersona,nombre, imagen):
-    
     
     cursor = db.cursor() 
     cursor.execute("INSERT into imagenes(nombre,img,id_imagen) values (%s,%s,%s)", (

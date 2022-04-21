@@ -1,7 +1,8 @@
+from asyncio.windows_events import NULL
 from sqlalchemy import false
 from config.database import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,session
 
 def obtenerUsuario():
 
@@ -30,27 +31,29 @@ def verificarusuario(email):
 
 def ingresoUsuario(email, password):
 
-
+    pas=False
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT  id,nombre,PASSWORD,activo  from usuarios WHERE email = %s",(email,))
     usuario = cursor.fetchall()
     cursor.close()
     
-    for passw in usuario:
-        pas=check_password_hash(passw["PASSWORD"],password),
-        
-        
-    if pas == True:
-        print("si esta el usuario")
-        cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * from usuarios where email = %s and password = %s", (
-           email,
-           password
-         ))
-        usuario = cursor.fetchone()
-        cursor.close()
 
-    return usuario
+    for passw in usuario:
+        
+        pas=check_password_hash(passw["PASSWORD"],password)
+        
+        if pas == True:
+            if passw["activo"] != None:
+                session['usuario_id'] = passw["id"]
+                return render_template("inicio.html",usuarios=passw)
+                
+            else:
+                flash("Falta activacion")
+        else:
+            flash("Usuario o Paswword incorrectos")
+            return render_template("login.html")
+        
+    return passw
 
 def crearusuario(nombre, email, password):
 
@@ -72,5 +75,17 @@ def crearimagen(imagen):
 
     return 
 
+def activar(url,toke):
+    
+    cursor = db.cursor(dictionary=True)
+    if url != None:
+        print()
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("UPDATE usuarios SET activo = 'activo' WHERE email = (%s)",(
+          toke,  
+        ))
+        cursor.close()
+        
+    return
 #comparar la encriptacion con la original
     #print(check_password_hash(password,password))

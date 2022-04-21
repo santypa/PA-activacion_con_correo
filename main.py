@@ -3,28 +3,31 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from models import usuariosmodels
 from controller import validarcorreo
-from controller import validarlogin
 from controller import send_main
-from controller import archivo
+from models import archivo
+from controller import token
+from controller import ingreso
+from controller import sesion
+import string
+import random
+from config.database import db
 
-
-app = Flask(__name__)  # instancia python.
+app = Flask(__name__) 
 app.secret_key = "sdasdasdasd"
 
-
-@app.get("/")  # funcion decoradora crea una ruta.
+@app.get("/")  
 def login():
     
     if 'usuario_id' in session:
-        return render_template("inicio.html")
-    
-    return render_template("login.html")
+       return render_template("inicio.html")
+    #sesion.sesion(direccion='login')
+    return  render_template("login.html")
 
-@app.post("/")  # funcion decoradora crea una ruta.
+@app.post("/") 
 def ingresar():
     
     if 'usuario_id' in session:
-        return render_template("inicio.html")
+       return render_template("inicio.html")
     
     email = request.form.get('email')
     password = request.form.get('password')
@@ -35,25 +38,8 @@ def ingresar():
     if password == "":
         flash("este campo es obligatorio")
 
-
+    
     usuario = usuariosmodels.ingresoUsuario(email=email, password=password)
-    
-    
-    if usuario == None:
-        flash("Usuario o Paswword incorrectos")
-        return render_template("login.html")
-    
-    #if usuario != None:
-        #if usuario['activo'] == None:
-          #  flash("El usuario no esta activo")
-            #return render_template("login.html")
-        
-    #session['usuario_id'] = usuario['id']
-   
-    
-        
-    if 'usuario_id' in session:
-        return render_template("inicio.html",usuario=usuario)
     
     return render_template("login.html",usuario=usuario) 
     
@@ -76,8 +62,11 @@ def crearUsuarioPost():
     
     if valor == True:
         return render_template("crear.html", nombre=nombre, email=email, password=password)
+    
+    
     usuariosmodels.crearusuario(nombre=nombre, email=email, password=password)
-
+    
+    
     direccion = email
     send_main.correo(direccion=direccion) 
     
@@ -87,10 +76,8 @@ def crearUsuarioPost():
 @app.get("/añadir")
 def guardarimagen():
     
-    persona = session["usuario_id"]
-    archivos = archivo.obtenerarchivo(persona=persona)
-    print(archivos)
-    
+    archivos = archivo.obtenerarchivo()
+
     return render_template("archivos.html", archivos=archivos)
 
 
@@ -120,4 +107,11 @@ def cerrarsesion():
     session.clear()
     return render_template("login.html")
      
+
+@app.route("/activar/<url>/<toke>")
+def activar(url,toke):
+    usuariosmodels.activar(url=url,toke=toke)
+    return redirect(url_for("ingresar"))     
+
+
 app.run(debug=True)
