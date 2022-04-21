@@ -4,7 +4,7 @@ from config.database import db
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 def obtenerarchivo():
-    
+
     persona= session["usuario_id"]
     cursor= db.cursor(dictionary=True)
     cursor.execute("SELECT * from imagenes where id_imagen = %s ",(
