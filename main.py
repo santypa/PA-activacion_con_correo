@@ -1,18 +1,10 @@
-from xml.dom.minidom import Identified
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from models import usuariosmodels
-from controller import validarcorreo
-from controller import send_main
 from models import archivo
-from controller import token
 from controller import ingreso
-from controller import sesion
 from controller import guardarimagenes
 from controller import registrarusuario
-import string
-import random
-from config.database import db
 
 app = Flask(__name__) 
 app.secret_key = "sdasdasdasd"
@@ -29,9 +21,7 @@ def ingresar():
     
     if 'usuario_id' in session:
        return render_template("inicio.html")
-   
     usuario = ingreso.validaringreso(email=request.form.get('email'),password = request.form.get('password'))
-
     return render_template("login.html",usuario=usuario) 
     
 @app.get("/crear")
@@ -40,9 +30,7 @@ def crearUsuario():
 
 @app.post("/crear")
 def crearUsuarioPost():
-    
     registrarusuario.registrar(nombre = request.form.get('nombre'),email = request.form.get('email'),password = request.form.get('password'))
-   
     return render_template("login.html")
 
 @app.get("/añadir")
