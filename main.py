@@ -5,6 +5,7 @@ from models import archivo
 from controller import ingreso
 from controller import guardarimagenes
 from controller import registrarusuario
+from controller import sesion
 
 app = Flask(__name__) 
 app.secret_key = "sdasdasdasd"
@@ -21,8 +22,11 @@ def ingresar():
     
     if 'usuario_id' in session:
        return render_template("inicio.html")
-    usuario = ingreso.validaringreso(email=request.form.get('email'),password = request.form.get('password'))
-    return render_template("login.html",usuario=usuario) 
+
+    if ingreso.validaringreso(email=request.form.get('email'),password = request.form.get('password')):
+        return render_template("inicio.html")
+    
+    return render_template("login.html") 
     
 @app.get("/crear")
 def crearUsuario():
@@ -53,5 +57,13 @@ def activar(url,toke):
     usuariosmodels.activar(url=url,toke=toke)
     return redirect(url_for("ingresar"))     
 
+@app.get("/recuperar")
+def recuperarcontra():
+     return render_template("recuperar.html")
+ 
+@app.post("/recuperar")
+def recuperarcontrapost(email):
+     return render_template("recuperar.html")
+    
 
 app.run(debug=True)

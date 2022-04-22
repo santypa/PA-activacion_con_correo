@@ -1,0 +1,32 @@
+{% extends "base.html"%} 
+
+{% block titulo %}
+    Recuperar Contraseña
+{% endblock %}
+
+{% block contenido%}
+
+
+<center>
+    <div class="padre2">
+        <h1   >RECUPERAR CONTRASEÑA</h1>
+    
+        
+        <form action="{{url_for('recuperarcontrapost')}}" method="post">
+    
+            <div class="form-group">
+                <label for="">Correo</label>
+                <input type="email" name="email"  class="form-control" placeholder="correo para recuperar contraseña..." required>
+            </div>
+    
+            <br>
+            <div class="botones">
+            <button type="submit" class="btn btn-primary">VALIDAR</button>
+        </div>      
+        </form>
+    
+    </div>
+    </center>
+
+
+{% endblock%}
