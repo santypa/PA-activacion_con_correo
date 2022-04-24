@@ -23,16 +23,21 @@ Archivos
                 {% for archivo in archivos %}
                 <div class="col">
                     <div class="card">
-
-                        {% if archivo['img']: %}
+                        <form action="{{url_for('eliminararchivo')}}" method="post">
+                            
+                            {% if archivo['img']: %}
                         <img src="{{archivo['img'] }}" style="width: 50%; ">
                         {% endif %}
 
                         <div class="card-body">
                             <h5 class="card-title">{{archivo['nombre'] }}</h5>
-                            <a href="#" class="btn btn-primary">Editar</a>
-                            <a href="#" class="btn btn-primary">Eliminar</a>
+                            <input type="hidden" name="id" value="{{archivo['id'] }}">
+                            <a href="" class="btn btn-outline-info ">Editar</a>
+                            <button type="submit" class="btn btn-outline-danger">DELET</button>
                         </div>
+
+                        </form>
+                        
                     </div>
                 </div>
                 {% endfor %}

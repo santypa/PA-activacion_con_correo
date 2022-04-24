@@ -8,6 +8,7 @@ from controller import registrarusuario
 from controller import correo
 from controller import cambiapas
 from controller import sesion
+from controller import eliminar
 
 
 
@@ -92,5 +93,11 @@ def contraupdate():
     if cambiapas.cambiarpass(password1 = request.form.get('password1'),password = request.form.get('password'),toke = request.form.get('toke')):
         return render_template("login.html")
     return render_template("restablecer.html",password = request.form.get('password'),toke = request.form.get('toke'))
+    
+@app.post("/eliminar")
+def eliminararchivo():
+    id = request.form.get('id')
+    print(id)
+    return  render_template("archivos.html")
     
 app.run(debug=True)

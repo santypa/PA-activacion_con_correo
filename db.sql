@@ -17,15 +17,30 @@
 CREATE DATABASE IF NOT EXISTS `login` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `login`;
 
+-- Volcando estructura para tabla login.imagenes
+CREATE TABLE IF NOT EXISTS `imagenes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `img` varchar(500) DEFAULT NULL,
+  `id_imagen` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_imagenes_usuarios` (`id_imagen`) USING BTREE,
+  CONSTRAINT `FK_imagenes_usuarios` FOREIGN KEY (`id_imagen`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+
+-- La exportación de datos fue deseleccionada.
+
 -- Volcando estructura para tabla login.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(1000) DEFAULT NULL,
-  `email` varchar(1000) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `password` varchar(1000) DEFAULT NULL,
-  `activo` varchar(11) DEFAULT NULL,
+  `activo` varchar(50) DEFAULT NULL,
+  `id_imagen` int(11) DEFAULT NULL,
+  `toke` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- La exportación de datos fue deseleccionada.
 
