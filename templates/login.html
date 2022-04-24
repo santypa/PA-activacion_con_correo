@@ -1,9 +1,19 @@
-{% extends "base.html"%} 
+{% extends "html/base.html"%}
 
 {% block titulo %}
     LOGIN
 {% endblock %}
-  
+{% block titulos %}
+<a class="navbar-brand" href="#">INGRESAR</a>
+{%endblock%}
+
+{% block boton %}
+<a href="{{ url_for('recuperarcontra')}}" class="btn btn-outline-primary" role="button" aria-pressed="true">RECUPERAR CONTRASEÑA</a>
+         --
+<a href="{{ url_for('crearUsuario')}}" class="btn btn-outline-success" role="button" aria-pressed="true">REGISTRAR USUARIO</a>
+{%endblock%}
+
+
 {% block contenido%}
 
 <center>
@@ -29,15 +39,13 @@
 
         <div class="form-group">
             <label for="">Password</label>
-            <input type="password" name="password" value="{{password}}" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" value="{{password}}" class="form-control btn-outline-dark" placeholder="Password" required>
         </div>
 
         <br>
         <div class="botones">
-        <button type="submit" class="btn btn-primary">INGRESAR</button>
-        <a href="{{ url_for('crearUsuario')}}" class="btn btn-primary" role="button" aria-pressed="true">REGISTRARSE</a>
-        <a href="{{ url_for('recuperarcontra')}}" class="btn btn-primary" role="button" aria-pressed="true">Recuerar contraseña</a>
-        
+        <button type="submit" class="btn btn-outline-danger">INGRESAR</button>
+
     </div>      
     </form>
 

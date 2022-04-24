@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from models import archivo
 
 def guardar(nombre,imagen):
-    
     isValid = True
     nombre = request.form.get('nombre')
     imagen = request.files['imagen']
@@ -14,10 +13,6 @@ def guardar(nombre,imagen):
         return render_template("inicio.html", nombre=nombre)
     
     idpersona = session["usuario_id"]
-    
     imagen.save('./static/image/'+ imagen.filename)
-    
     archivo.guardararchivo(idpersona=idpersona, nombre=nombre, imagen='/static/image/'+ imagen.filename)
-    
-    
     return 

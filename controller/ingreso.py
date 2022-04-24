@@ -7,13 +7,11 @@ from models import usuariosmodels
 
 
 def validaringreso(email, password):
-    
     if email == "":
         flash("este campo es obligatorio")
-
     if password == "":
         flash("este campo es obligatorio")
         
-    usuario = usuariosmodels.ingresoUsuario(email=email, password=password)
-
-    return usuario
+    usuariosmodels.ingresoUsuario(email=email, password=password)
+    
+    return 

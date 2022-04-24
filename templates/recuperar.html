@@ -1,8 +1,18 @@
-{% extends "base.html"%} 
+{% extends "html/base.html"%}
 
 {% block titulo %}
     Recuperar Contraseña
 {% endblock %}
+
+{% block titulos %}
+<a class="navbar-brand" href="#">CORREO DE RECUPERACION</a>
+{%endblock%}
+
+{% block boton %}
+<a href="{{ url_for('login')}}" class="btn btn-outline-primary" role="button" aria-pressed="true">LOGIN</a>
+         --
+<a href="{{ url_for('crearUsuario')}}" class="btn btn-outline-success" role="button" aria-pressed="true">REGISTRAR USUARIO</a>
+{%endblock%}
 
 {% block contenido%}
 
@@ -10,19 +20,29 @@
 <center>
     <div class="padre2">
         <h1   >RECUPERAR CONTRASEÑA</h1>
-    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="alert alert-danger">
+            {% for messages in messages %}
+                <li>{{messages}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
         
         <form action="{{url_for('recuperarcontrapost')}}" method="post">
     
             <div class="form-group">
                 <label for="">Correo</label>
-                <input type="email" name="email"  class="form-control" placeholder="correo para recuperar contraseña..." required>
+                <input type="email" name="email"  class="form-control" value="{{direccion}}" placeholder="correo para recuperar contraseña..." required>
             </div>
     
             <br>
             <div class="botones">
-            <button type="submit" class="btn btn-primary">VALIDAR</button>
-        </div>      
+            <button type="submit" class="btn btn-outline-danger">VALIDAR</button>
+          
+        </div> 
+             
         </form>
     
     </div>

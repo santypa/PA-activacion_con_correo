@@ -7,6 +7,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 
 
 def correovalido(email):
+    valido = True
     signos = ['.', '_', '-']
     numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     dominios = ['gmail', 'hotmail', 'msn', 'yahoo', 'outlook', 'live']
@@ -16,8 +17,6 @@ def correovalido(email):
 
     for x in minusculas:
         mayusculas.append(x.upper())
-
-    problema = ""
 
     if email.find('@') !=-1:
         nuevo_email = email.split('@')
@@ -47,23 +46,11 @@ def correovalido(email):
 
     return valido
 
-def validarlog(nombre,email,password):
-    
-    
+def validarpas(password):
     minusculas = False
     mayusculas = False
     numeros = False
     especial = False
-    
-
-    if nombre == "":
-        valor = False
-        flash("este campo es obligatorio")
-
-    if email == "":
-        valor = False
-        flash( "este campo es obligatorio")
-
     if password == "":
         valor = False
         flash("este campo es obligatorio")
@@ -102,14 +89,23 @@ def validarlog(nombre,email,password):
         
     return valor
 
-def redir(usuario,valido1,valido,nombre,email,password):
+def validarlog(nombre,email):
     
-    isValid1=valido1
-    isValid=valido
-    
+    valor = True
+    if nombre == "":
+        valor = False
+        flash("este campo es obligatorio")
+
+    if email == "":
+        valor = False
+        flash( "este campo es obligatorio")
+
+    return valor
+
+def redir(usuario,valido1,valido,correo):
     
     valor = False
-    if isValid == False or isValid1 == False or usuario == False :
+    if valido == False or valido1 == False or usuario == False or correo == False :
         valor = True
         
     return valor

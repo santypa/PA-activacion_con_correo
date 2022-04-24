@@ -4,11 +4,7 @@ from requests import session
 from config.database import db
 
 
-def sesion(direccion):
-    
-    print(session["usuario_id"])
+def sesion():
     if  session["usuario_id"] != None:
-        return url_for(direccion)
-        #return render_template("inicio.html")
-        
+        return render_template("archivos.html")
     return

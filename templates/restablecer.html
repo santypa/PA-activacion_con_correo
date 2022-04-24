@@ -1,0 +1,51 @@
+{% extends "html/base.html"%}
+
+{% block titulo %}
+Recuperar Contraseña
+{% endblock %}
+
+
+
+{% block contenido%}
+
+
+<center>
+    <div class="padre2">
+        <h1>RECUPERAR CONTRASEÑA</h1>
+
+
+        <form action="{{url_for('contraupdate')}}" method="post">
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="alert alert-danger">
+                {% for messages in messages %}
+                <li>{{messages}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <div class="form-group">
+                <label for="">Nueva password</label>
+                <input type="password" name="password" class="form-control btn-outline-dark" value="{{password}}" placeholder="contraseña nueva" required>
+            </div>
+
+            <input type="hidden" name="toke" value="{{toke}}">
+            <div class="form-group">
+                <label for="">confirmar contraseña</label>
+                <input type="password" name="password1" class="form-control btn-outline-dark" placeholder="confirmar contraseña"
+                    required>
+            </div>
+
+            <br>
+            <div class="botones">
+                <button type="submit" class="btn btn-outline-danger">VALIDAR</button>
+            </div>
+        </form>
+
+    </div>
+</center>
+
+
+{% endblock%}

@@ -1,15 +1,34 @@
-{% extends "base.html"%} 
+{% extends "html/base.html"%}
 
 {% block titulo %}
     INICIO
 {% endblock %}
   
+{% block titulos %}
+<a class="navbar-brand" href="#">GUARDAR ARCHIVO</a>
+{%endblock%}
+
+{% block boton %}
+<a href="{{ url_for('guardarimagen')}}" class="btn btn-outline-primary" role="button" aria-pressed="true">VER ARCHIVO</a>
+         --
+<a href="{{ url_for('cerrarsesion')}}" class="btn btn-outline-success" role="button" aria-pressed="true">SALIR</a>
+{%endblock%}
+
+
 {% block contenido%}
 
 <center>
 <div class="padre2">
     <h1>INICIO</h1>
-
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="alert alert-danger">
+            {% for messages in messages %}
+                <li>{{messages}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
     <form action="{{ url_for('guardarimagenpost')}}"
     enctype="multipart/form-data" method="POST">
 
@@ -19,16 +38,14 @@
     </div><br>
     <div>
         <label form="">Imagen</label>
-        <input type="file" name="imagen" required>
+        <input  class="btn btn-outline-info" type="file" name="imagen" required>
     </div><br>
 
-    <button type="submit">Guardar</button>
+    <button type="submit" class="btn btn-outline-danger" >Guardar</button>
 
 </form>
 
-<a href="{{ url_for('cerrarsesion')}}"  class="btn btn-primary" role="button" aria-pressed="true">SALIR</a>
-<a href="{{ url_for('guardarimagen')}}"  class="btn btn-primary" role="button" aria-pressed="true">Archivos</a>
-   
+
 </div>
 </center>
 {% endblock%}

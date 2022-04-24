@@ -1,9 +1,10 @@
 from asyncio.windows_events import NULL
+from requests import PreparedRequest
 from sqlalchemy import false
 from config.database import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, url_for, flash,session
-
+from models import archivo
 def obtenerUsuario():
 
     cursor = db.cursor(dictionary=True)
@@ -30,30 +31,27 @@ def verificarusuario(email):
     return valor
 
 def ingresoUsuario(email, password):
-
     pas=False
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT  id,nombre,PASSWORD,activo  from usuarios WHERE email = %s",(email,))
     usuario = cursor.fetchall()
     cursor.close()
     
-
     for passw in usuario:
         
         pas=check_password_hash(passw["PASSWORD"],password)
-        
         if pas == True:
             if passw["activo"] != None:
                 session['usuario_id'] = passw["id"]
-                return render_template("inicio.html",usuarios=passw)
-                
+                archivos = archivo.obtenerarchivo()
+                return render_template("archivos.html", archivos=archivos)
             else:
                 flash("Falta activacion")
         else:
             flash("Usuario o Paswword incorrectos")
             return render_template("login.html")
         
-    return passw
+    return 
 
 def crearusuario(nombre, email, password):
 
