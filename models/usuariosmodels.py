@@ -43,7 +43,7 @@ def ingresoUsuario(email, password):
         if pas == True:
             if passw["activo"] != None:
                 session['usuario_id'] = passw["id"]
-                archivos = archivo.obtenerarchivo()
+                archivos = archivo.obtenerarchivo(id=session['usuario_id'])
                 return render_template("archivos.html", archivos=archivos)
             else:
                 flash("Falta activacion")
@@ -77,7 +77,6 @@ def activar(url,toke):
     
     cursor = db.cursor(dictionary=True)
     if url != None:
-        print()
         cursor = db.cursor(dictionary=True)
         cursor.execute("UPDATE usuarios SET activo = 'activo' WHERE email = (%s)",(
           toke,  

@@ -25,7 +25,6 @@ def validausuario(direccion):
   return usuario
 
 def cargartokenpassword(direccion,toke):
-  print(direccion,toke)
   cursor = db.cursor(dictionary=True)
   cursor.execute("UPDATE usuarios SET `toke`= %s where email = %s",(
         toke,

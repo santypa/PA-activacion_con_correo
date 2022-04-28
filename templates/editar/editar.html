@@ -1,0 +1,55 @@
+{% extends "html/base.html"%}
+
+{% block titulo %}
+    EDITAR
+{% endblock %}
+  
+{% block titulos %}
+<a class="navbar-brand" href="#">GUARDAR ARCHIVO</a>
+{%endblock%}
+
+{% block boton %}
+<a href="{{ url_for('guardarimagen')}}" class="btn btn-outline-primary" role="button" aria-pressed="true">VER ARCHIVO</a>
+         --
+<a href="{{ url_for('cerrarsesion')}}" class="btn btn-outline-success" role="button" aria-pressed="true">SALIR</a>
+{%endblock%}
+
+{% block contenido%}
+
+<center>
+<div class="padre2">
+    <h1>EDITAR ARCHIVO</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="alert alert-danger">
+            {% for messages in messages %}
+                <li>{{messages}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('editararchivopost')}}"
+    enctype="multipart/form-data" method="POST">
+   
+    <div>
+        <label for="">Nombre</label>
+        <input type="text" name="nombre" value="{{archivo[0]['nombre']}}"required>
+    </div><br>
+    <div>
+        <input type="hidden" name="id" value="{{archivo[0]['id']}}">
+
+        {% if archivo[0]['img']: %}
+            <img src="{{archivo[0]['img'] }}" style="width: 50%; ">
+        {% endif %}
+        <br>
+        <input  class="btn btn-outline-info" type="file"  name="imagen" required>
+    </div><br>
+    <button type="submit" class="btn btn-outline-danger" >Guardar</button>
+
+</form>
+
+
+</div>
+</center>
+{% endblock%}

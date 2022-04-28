@@ -1,14 +1,16 @@
 {% extends "html/base.html"%}
 
 {% block titulo %}
-Archivos
+ver Archivos
 {% endblock %}
 
 {% block titulos %}
-<a class="navbar-brand" href="#">MIS ARCHIVOS</a>
+<a class="navbar-brand" href="#"> MI ARCHIVO </a>
 {%endblock%}
 
 {% block boton %}
+<a href="{{ url_for('guardarimagen')}}" class="btn btn-outline-primary" role="button" aria-pressed="true">VER ARCHIVO</a>
+         --
 <a href="{{ url_for('mostrar')}}" class="btn btn-outline-primary" role="button" aria-pressed="true">AÑADIR ARCHIVO</a>
          --
 <a href="{{ url_for('cerrarsesion')}}" class="btn btn-outline-success" role="button" aria-pressed="true">SALIR</a>
@@ -33,8 +35,7 @@ Archivos
                             <h5 class="card-title">{{archivo['nombre'] }}</h5>
                             <label for=""> </label>
                             <input type="hidden" name="id" value="{{archivo['id']}}">
-                            <a href="{{url_for('verarchivos',id=(archivo['id']))}}" class="btn btn-outline-info ">Ver</a>
-                            
+                            <a href="{{url_for('editararchivo',id=(archivo['id']))}}" class="btn btn-outline-info ">Editar</a> 
                             <button type="submit" class="btn btn-outline-danger">DELET</button>
         
                         </div>
