@@ -112,4 +112,4 @@ def editararchivopost():
 def verarchivos(id):
     return render_template("/archivos/verarchivos.html",archivos=archivo.misarchvios(id=id))
 
-app.run(debug=True)
+#app.run(debug=True)
